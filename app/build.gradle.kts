@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -42,6 +43,10 @@ android {
 }
 
 dependencies {
+
+
+    implementation(libs.kotlinx.serialization)
+    implementation(libs.androidx.navigation.compose)
 
     implementation(libs.hilt.android)
     implementation(libs.hilt.android.compiler)
