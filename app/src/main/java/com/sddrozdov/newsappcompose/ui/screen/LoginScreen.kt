@@ -17,16 +17,19 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sddrozdov.newsappcompose.R
+import com.sddrozdov.newsappcompose.ui.component.StyledButton
 import com.sddrozdov.newsappcompose.ui.navigation.Screen
+import com.sddrozdov.newsappcompose.ui.screen.viewmodel.LoginScreenViewModel
 
 @Composable
 fun LoginScreen(
-    onNavigateTo: (Screen) -> Unit = {}
+    onNavigateTo: (Screen) -> Unit = {},
+    viewModel: LoginScreenViewModel = viewModel()
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -43,26 +46,39 @@ fun LoginScreen(
             modifier = Modifier.padding(top = 15.dp)
         )
         OutlinedTextField(
-            value = "Email",
-            onValueChange = {},
+            modifier = Modifier.padding(top = 15.dp),
+            value = viewModel.email,
+            onValueChange = viewModel::updateEmail,
             leadingIcon = {
                 Icon(
                     painter = rememberVectorPainter(image = Icons.Outlined.Email),
                     contentDescription = ""
                 )
-            }, modifier = Modifier.padding(top = 15.dp)
+            },
+            placeholder = {
+                Text(text = stringResource(R.string.enter_email))
+            }
         )
         OutlinedTextField(
-            value = "Password",
-            onValueChange = {},
+            value = viewModel.password,
+            onValueChange = viewModel::updatePassword,
             leadingIcon = {
                 Icon(
                     painter = rememberVectorPainter(image = Icons.Outlined.Lock),
                     contentDescription = ""
                 )
             }, modifier = Modifier.padding(top = 15.dp),
-            visualTransformation = PasswordVisualTransformation()
+            visualTransformation = PasswordVisualTransformation(),
+            placeholder = {
+                Text(text = stringResource(R.string.enter_password))
+            }
         )
+        StyledButton(onClick = {}) {
+            Text(
+                text = stringResource(R.string.login),
+                fontSize = 21.sp
+            )
+        }
     }
 }
 
