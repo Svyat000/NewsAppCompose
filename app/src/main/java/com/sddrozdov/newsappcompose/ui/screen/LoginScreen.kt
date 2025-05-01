@@ -1,6 +1,7 @@
 package com.sddrozdov.newsappcompose.ui.screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -73,12 +74,23 @@ fun LoginScreen(
                 Text(text = stringResource(R.string.enter_password))
             }
         )
-        StyledButton(onClick = {}) {
+        StyledButton(
+            onClick = {},
+            modifier = Modifier.padding(top = 35.dp)
+        ) {
             Text(
                 text = stringResource(R.string.login),
                 fontSize = 21.sp
             )
         }
+        Text(
+            text = stringResource(id = R.string.no_account),
+            fontSize = 14.sp,
+            modifier = Modifier.padding(top = 20.dp).
+            clickable {
+                onNavigateTo(Screen.Register)
+            }
+        )
     }
 }
 

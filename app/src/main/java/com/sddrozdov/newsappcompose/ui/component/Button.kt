@@ -1,5 +1,7 @@
 package com.sddrozdov.newsappcompose.ui.component
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -22,6 +24,8 @@ fun StyledButton(
             containerColor = Color.Black
         )
     ) {
-        content()
+        Box(modifier = Modifier.padding(horizontal = 22.dp, vertical = 2.dp)) {
+            content()
+        }
     }
 }
