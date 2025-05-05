@@ -21,14 +21,29 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sddrozdov.newsappcompose.R
 import com.sddrozdov.newsappcompose.ui.component.StyledButton
 import com.sddrozdov.newsappcompose.ui.navigation.Screen
 import com.sddrozdov.newsappcompose.ui.screen.state.LoginScreenEvent
 import com.sddrozdov.newsappcompose.ui.screen.state.LoginScreenState
+import com.sddrozdov.newsappcompose.ui.screen.viewmodel.LoginScreenViewModel
 
 @Composable
 fun LoginScreen(
+    onNavigateTo: (Screen) -> Unit
+){
+   val viewModel = viewModel<LoginScreenViewModel>()
+   LoginView(
+       state = viewModel.state,
+       onNavigateTo = onNavigateTo,
+       onEvent = viewModel::onEvent
+   )
+}
+
+
+@Composable
+fun LoginView(
     onNavigateTo: (Screen) -> Unit = {},
     state: LoginScreenState = LoginScreenState(),
     onEvent: (LoginScreenEvent) -> Unit = {}
@@ -103,5 +118,5 @@ fun LoginScreen(
 @Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    LoginView()
 }
