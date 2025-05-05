@@ -21,16 +21,17 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sddrozdov.newsappcompose.R
 import com.sddrozdov.newsappcompose.ui.component.StyledButton
 import com.sddrozdov.newsappcompose.ui.navigation.Screen
-import com.sddrozdov.newsappcompose.ui.screen.viewmodel.LoginScreenViewModel
+import com.sddrozdov.newsappcompose.ui.screen.state.LoginScreenEvent
+import com.sddrozdov.newsappcompose.ui.screen.state.LoginScreenState
 
 @Composable
 fun LoginScreen(
     onNavigateTo: (Screen) -> Unit = {},
-    viewModel: LoginScreenViewModel = viewModel()
+    state: LoginScreenState = LoginScreenState(),
+    onEvent: (LoginScreenEvent) -> Unit = {}
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -48,8 +49,10 @@ fun LoginScreen(
         )
         OutlinedTextField(
             modifier = Modifier.padding(top = 15.dp),
-            value = viewModel.email,
-            onValueChange = viewModel::updateEmail,
+            value = state.email,
+            onValueChange = {
+                onEvent(LoginScreenEvent.EmailUpdated(it))
+            },
             leadingIcon = {
                 Icon(
                     painter = rememberVectorPainter(image = Icons.Outlined.Email),
@@ -61,8 +64,10 @@ fun LoginScreen(
             }
         )
         OutlinedTextField(
-            value = viewModel.password,
-            onValueChange = viewModel::updatePassword,
+            value = state.password,
+            onValueChange = {
+                onEvent(LoginScreenEvent.PasswordUpdated(it))
+            },
             leadingIcon = {
                 Icon(
                     painter = rememberVectorPainter(image = Icons.Outlined.Lock),
@@ -86,10 +91,11 @@ fun LoginScreen(
         Text(
             text = stringResource(id = R.string.no_account),
             fontSize = 14.sp,
-            modifier = Modifier.padding(top = 20.dp).
-            clickable {
-                onNavigateTo(Screen.Register)
-            }
+            modifier = Modifier
+                .padding(top = 20.dp)
+                .clickable {
+                    onNavigateTo(Screen.Register)
+                }
         )
     }
 }
