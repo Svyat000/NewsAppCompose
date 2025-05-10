@@ -1,6 +1,7 @@
 package com.sddrozdov.newsappcompose.ui.screen
 
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -22,8 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sddrozdov.newsappcompose.R
+import com.sddrozdov.newsappcompose.ui.component.StyledButton
 import com.sddrozdov.newsappcompose.ui.navigation.Screen
-import com.sddrozdov.newsappcompose.ui.screen.state.LoginScreenEvent
 import com.sddrozdov.newsappcompose.ui.screen.state.RegisterScreenEvent
 import com.sddrozdov.newsappcompose.ui.screen.state.RegisterScreenState
 import com.sddrozdov.newsappcompose.ui.screen.viewmodel.RegisterScreenViewModel
@@ -102,7 +103,24 @@ fun RegisterView(
                 Text(text = stringResource(R.string.enter_password))
             }
         )
-
+        StyledButton(
+            onClick = {},
+            modifier = Modifier.padding(top = 35.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.register),
+                fontSize = 21.sp
+            )
+        }
+        Text(
+            text = stringResource(id = R.string.already_have_an_acc),
+            fontSize = 14.sp,
+            modifier = Modifier
+                .padding(top = 20.dp)
+                .clickable {
+                    onNavigateTo(Screen.Register)
+                }
+        )
     }
 }
 
