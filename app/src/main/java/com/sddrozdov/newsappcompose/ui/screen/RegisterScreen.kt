@@ -56,7 +56,7 @@ fun RegisterView(
             modifier = Modifier.padding(top = 110.dp)
         )
         OutlinedTextField(
-            modifier = Modifier.padding(top = 15.dp),
+            modifier = Modifier.padding(top = 150.dp),
             value = state.username,
             onValueChange = {
                 onEvent(RegisterScreenEvent.UsernameUpdated(it))
@@ -118,7 +118,7 @@ fun RegisterView(
             modifier = Modifier
                 .padding(top = 20.dp)
                 .clickable {
-                    onNavigateTo(Screen.Register)
+                    onNavigateTo(Screen.Login)
                 }
         )
     }
