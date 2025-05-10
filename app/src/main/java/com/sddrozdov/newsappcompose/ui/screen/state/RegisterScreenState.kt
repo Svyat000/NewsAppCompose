@@ -7,7 +7,7 @@ data class RegisterScreenState(
 )
 
 sealed class RegisterScreenEvent{
-    data class UsernameUpdated(val newUserName: String) : RegisterScreenEvent()
+    data class UsernameUpdated(val newUsername: String) : RegisterScreenEvent()
     data class EmailUpdated(val newEmail: String) : RegisterScreenEvent()
     data class PasswordUpdated(val newPassword: String) : RegisterScreenEvent()
 }
