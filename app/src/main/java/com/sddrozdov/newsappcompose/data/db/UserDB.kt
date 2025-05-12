@@ -1,0 +1,11 @@
+package com.sddrozdov.newsappcompose.data.db
+
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.sddrozdov.newsappcompose.domain.dao.UserDao
+import com.sddrozdov.newsappcompose.domain.entity.User
+
+@Database(entities = [User::class], version = 1)
+abstract class UserDB : RoomDatabase() {
+    abstract fun getUserDao(): UserDao
+}
