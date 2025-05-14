@@ -1,4 +1,4 @@
-package com.sddrozdov.newsappcompose.domain.entity
+package com.sddrozdov.newsappcompose.domain.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

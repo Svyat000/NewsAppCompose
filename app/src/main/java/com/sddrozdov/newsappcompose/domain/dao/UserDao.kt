@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.sddrozdov.newsappcompose.domain.entity.User
+import com.sddrozdov.newsappcompose.domain.models.User
 
 @Dao
 interface UserDao {
@@ -16,5 +16,8 @@ interface UserDao {
 
     @Query("SELECT * FROM user WHERE email=:email")
     fun getUserByEmail(email: String): User?
+
+    @Query("SELECT * FROM user WHERE email=:email and password =:password")
+   fun login(email: String,password: String) : User?
 
 }
