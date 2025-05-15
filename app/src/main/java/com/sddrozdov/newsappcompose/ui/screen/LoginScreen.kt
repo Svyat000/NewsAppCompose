@@ -24,7 +24,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.sddrozdov.newsappcompose.R
 import com.sddrozdov.newsappcompose.ui.component.StyledButton
 import com.sddrozdov.newsappcompose.ui.navigation.Screen
@@ -37,7 +37,7 @@ import com.sddrozdov.newsappcompose.util.Result
 fun LoginScreen(
     onNavigateTo: (Screen) -> Unit
 ) {
-    val viewModel = viewModel<LoginScreenViewModel>()
+    val viewModel = hiltViewModel<LoginScreenViewModel>()
 
     val context = LocalContext.current
     LaunchedEffect(viewModel.state.loginResult) {

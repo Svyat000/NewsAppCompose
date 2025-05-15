@@ -8,14 +8,14 @@ import javax.inject.Inject
 
 class AuthRepository @Inject constructor(private val userDao: UserDao) {
 
-    fun login(email: String, password: String): Result {
+    suspend fun login(email: String, password: String): Result {
         val loginUser = userDao.login(email, password)
         val result = if (loginUser == null) Result.Failure("Ошибка, проверьте данные")
         else Result.Success("Успешно")
         return result
     }
 
-    fun register(username: String, email: String, password: String): Result {
+    suspend fun register(username: String, email: String, password: String): Result {
         if (userDao.getUserByEmail(email) != null)
             return Result.Failure("Email уже используется")
         val user = User(
