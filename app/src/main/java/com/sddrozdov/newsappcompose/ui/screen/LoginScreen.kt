@@ -118,7 +118,7 @@ fun LoginView(
             }
         )
         StyledButton(
-            onClick = {},
+            onClick = { onEvent(LoginScreenEvent.LoginBtnClicked) },
             modifier = Modifier.padding(top = 35.dp)
         ) {
             Text(

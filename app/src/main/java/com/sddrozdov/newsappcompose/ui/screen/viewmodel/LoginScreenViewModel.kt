@@ -30,6 +30,7 @@ class LoginScreenViewModel @Inject constructor(private val authRepository: AuthR
     private fun login() {
         val email = state.email
         val password = state.password
+        if(email.isEmpty()||password.isEmpty()) return
         val result = authRepository.login(email, password)
         this.state = state.copy(loginResult = result)
     }
