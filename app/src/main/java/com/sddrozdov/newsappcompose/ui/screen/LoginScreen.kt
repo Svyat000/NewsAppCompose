@@ -1,5 +1,6 @@
 package com.sddrozdov.newsappcompose.ui.screen
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -12,9 +13,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -28,17 +31,37 @@ import com.sddrozdov.newsappcompose.ui.navigation.Screen
 import com.sddrozdov.newsappcompose.ui.screen.state.LoginScreenEvent
 import com.sddrozdov.newsappcompose.ui.screen.state.LoginScreenState
 import com.sddrozdov.newsappcompose.ui.screen.viewmodel.LoginScreenViewModel
+import com.sddrozdov.newsappcompose.util.Result
 
 @Composable
 fun LoginScreen(
     onNavigateTo: (Screen) -> Unit
-){
-   val viewModel = viewModel<LoginScreenViewModel>()
-   LoginView(
-       state = viewModel.state,
-       onNavigateTo = onNavigateTo,
-       onEvent = viewModel::onEvent
-   )
+) {
+    val viewModel = viewModel<LoginScreenViewModel>()
+
+    val context = LocalContext.current
+    LaunchedEffect(viewModel.state.loginResult) {
+        viewModel.state.loginResult?.let { loginResult ->
+            when (loginResult) {
+                is Result.Success -> {
+                    onNavigateTo(Screen.Main)
+                }
+                is Result.Failure -> {
+                    Toast.makeText(
+                        context,
+                        loginResult.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
+
+    LoginView(
+        state = viewModel.state,
+        onNavigateTo = onNavigateTo,
+        onEvent = viewModel::onEvent
+    )
 }
 
 
