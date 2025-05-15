@@ -50,6 +50,7 @@ dependencies {
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.navigation.compiler)
 
     implementation(libs.room.ktx)
     implementation(libs.room.runtime)
